@@ -1,0 +1,83 @@
+import { useEffect, useState } from "react";
+import Input from './_components/Input';
+import Select from './_components/Select';
+
+export default function Index() {
+    // 스텝별 데이터를 배열로 저장
+    const [steps, setSteps] = useState([{ step: 1, parent: null, data: [] }]);
+    // 전체 데이터
+    const [params, setParams] = useState({});
+
+    // 페이지 렌더링 시 데이터 불러옴
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const params = require('/public/data/params.example.v0.1.json');
+                setParams(params);
+                console.log('Data fetched:', params);
+                const initialData = searchParams(params.data, 1, null);
+                setSteps([{ step: 1, parent: null, data: initialData }]);
+                console.log('Initial data fetched:', initialData);
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        };
+        fetchData();
+    }, []);
+
+    // step과 parent 기준으로 데이터(params)에서 필요한 항목 검색
+    function searchParams(params, step, parent) {
+        const result = [];
+        params.forEach((_items) => {
+            _items.forEach((_item) => {
+                step = parseInt(step);
+                if (_item.step === step) {
+                    if (step > 1 && parent) {
+                        _item.parents.forEach((_parent) => {
+                            if (_parent === parent) {
+                                result.push(_item);
+                            }
+                        });
+                    } else if (step === 1) {
+                        result.push(_item);
+                    }
+                }
+            });
+        });
+        return result;
+    }
+
+    // Select 컴포넌트에서 값이 수정할 때 호출되는 함수
+    const selectChange = (step, selectedValue) => {
+        const updatedSteps = steps.slice(0, step);
+
+        const newStep = step + 1;
+        const filteredData = searchParams(params.data, newStep, selectedValue);
+
+        if (filteredData.length > 0) {
+            updatedSteps.push({ step: newStep, parent: selectedValue, data: filteredData });
+        }
+
+        setSteps(updatedSteps);
+    };
+
+    const onChange = (step) => (value) => {
+        selectChange(step, value);
+    }
+
+    // Reset 함수 step1로 초기화
+    const reset = () => {
+        const initialData = searchParams(params.data, 1, null);
+        setSteps([{ step: 1, parent: null, data: initialData }]);
+    };
+
+    return (
+        <div>
+            {steps.map(({ step, parent, data }, index) => (
+                <Select key={index} data={data} onChange={onChange(step)}/>
+            ))}
+            <button onClick={reset}>Reset</button>
+            <button>Review</button>
+        </div>
+    );
+}

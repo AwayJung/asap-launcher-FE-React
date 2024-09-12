@@ -1,0 +1,133 @@
+{
+    "decription": "",
+    "data": [
+        [
+            {
+                "step": 1,
+                "parents": [],
+                "type": "field",
+                "label": "Disk model",
+                "value": "disk-model",
+                "params": [
+                    {
+                        "form": "select",
+                        "items": [
+                            {
+                                "type": "param",
+                                "label": "SSD",
+                                "value": "ssd"
+                            },
+                            {
+                                "type": "param",
+                                "label": "ODF",
+                                "value": "odf"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        [
+            {
+                "step": 2,
+                "parents": ["ssd"],
+                "type": "field",
+                "label": "Instance",
+                "value": "instance",
+                "params": [
+                    {
+                        "form": "select",
+                        "items": [
+                            {
+                                "type": "param",
+                                "label": "Baremetal",
+                                "value": "baremetal"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "step": 2,
+                "parents": ["odf"],
+                "type": "field",
+                "label": "Instance",
+                "value": "instance",
+                "params": [
+                    {
+                        "form": "select",
+                        "items": [
+                            {
+                                "type": "param",
+                                "label": "Baremetal",
+                                "value": "baremetal"
+                            },
+                            {
+                                "type": "param",
+                                "label": "VM",
+                                "value": "vm"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        [
+            {
+                "step": 3,
+                "parents": ["baremetal"],
+                "type": "field",
+                "label": "App",
+                "value": "app",
+                "params": [
+                    {
+                        "form": "select",
+                        "items": [
+                            {
+                                "type": "param",
+                                "label": "MySQL",
+                                "value": "mysql"
+                            },
+                            {
+                                "type": "param",
+                                "label": "PostgreSQL",
+                                "value": "postgresql"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        [
+            {
+                "step": 4,
+                "parents": ["mysql"],
+                "type": "field",
+                "label": "OS",
+                "value": "os",
+                "params": [
+                    {
+                        "form": ["select", "input"],
+                        "items": [
+                            {
+                                "type": "param",
+                                "label": "Windows",
+                                "value": "windows"
+                            },
+                            {
+                                "type": "param",
+                                "label": "Mac",
+                                "value": "mac"
+                            },
+                            {
+                                "type": "param",
+                                "label": "Linux",
+                                "value": "linux"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    ]
+}

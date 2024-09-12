@@ -1,0 +1,31 @@
+{
+  "decription": "",
+  "endpoint": "http://asap.splunkmonitoring.k-lab/workflow-template/launch/",
+  "data": [
+    {
+      "id": 13,
+      "name": "0001. Workflow_db_install_ctrace_baremetal",
+      "params": "1:disk-model>2:instance>3:app>4:os>"
+    },
+    {
+      "id": 14,
+      "name": "0001. Workflow_ctrace_fio_only_baremetal",
+      "params": "1:disk-model>2:monitoring_path>3:nvme_model_name>4:data_path>"
+    },
+    {
+      "id": 15,
+      "name": "0002. workflow_vm_provision_ctrace_osp",
+      "params": "1:disk-model>2:vm_name>3:vm_size>4:image_name>"
+    },
+    {
+      "id": 16,
+      "name": "0003. Workflow_db_install_ctrace_baremetal",
+      "params": "1:disk-model>2:instance>3:app>4:os>"
+    },
+    {
+      "id": 17,
+      "name": "0004. Workflow_db_install_ctrace_baremetal",
+      "params": "1:disk-model>2:wonjung>3:app>4:os>"
+    }
+  ]
+}
